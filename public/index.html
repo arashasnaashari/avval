@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        background-color: azure;
+        width: 100%;
+      }
+      * {
+        border-radius: 10px;
+        padding: 4px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .container {
+        padding: 20px;
+      }
+      .inputbar {
+        display: flex;
+        justify-content: space-around;
+        background-color: gray;
+        margin-bottom: 20px;
+      }
+      input {
+        padding: 10px;
+        margin: 10px;
+        border: none;
+        font-size: 10px;
+      }
+      input:focus {
+        outline: none;
+      }
+      .addbar {
+        margin: 0 auto;
+        width: 75%;
+        background-color: teal;
+      }
+      .avvalha {
+        margin: 0 auto;
+        width: 90%;
+        background-color: whitesmoke;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .avvalhabadge {
+        background-color: rgb(224, 222, 56);
+        width: 20%;
+        margin: 10px;
+        text-align: center;
+      }
+      .btn {
+        padding: 10px;
+        margin: 10px;
+        border: none;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inputbar">
+        <input type="number" placeholder="check numbers till" class="till" />
+        <button class="btn">go!!</button>
+      </div>
+
+      <div class="addbar">
+        <h5>
+          numbers till:
+          <span class="tillNumbershow"></span>
+          n:
+          <span class="tedad"></span>
+        </h5>
+        <div class="avvalha"></div>
+      </div>
+    </div>
+    <script>
+      const btn = document.querySelector(".btn");
+
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        var e = document.querySelector(".avvalha");
+        var child = e.lastElementChild;
+        while (child) {
+          e.removeChild(child);
+          child = e.lastElementChild;
+        }
+        const till = document.querySelector(".till").value;
+        my(till);
+        document.querySelector(".tillNumbershow").innerHTML = till;
+      });
+
+      function my(had) {
+        let numbers = [];
+        let avval = [
+          2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
+          67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137,
+          139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211,
+          223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283,
+          293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379,
+          383, 389, 397,
+        ];
+        for (let i = 2; i < had; i++) {
+          let n = Math.floor(Math.sqrt(i));
+          function OO(n) {
+            /*********** */
+            /*********** */
+            let smallers = avval.filter((e) => e < n + 1);
+            let javabTaghsim = smallers.map((p) => Number.isInteger(i / p));
+
+            if (javabTaghsim.find((a) => a == true)) {
+              return "";
+            } else {
+              return "aval";
+            }
+          }
+
+          numbers.push({ number: i, state: OO(n) });
+        }
+        let newAvval = numbers.filter((w) => w.state == "aval");
+        let avval1 = [];
+        for (let i = 0; i < newAvval.length; i++) {
+          avval1.push(newAvval[i].number);
+          avval.push(newAvval[i].number);
+        }
+
+        for (let i = 0; i < avval1.length; i++) {
+          var div = document.createElement("div");
+          div.className = "avvalhabadge";
+          div.innerHTML = avval1[i];
+          document.querySelector(".avvalha").appendChild(div);
+        }
+        document.querySelector(".tedad").innerHTML = avval1.length;
+        console.log(avval1);
+      }
+    </script>
+  </body>
+</html>
